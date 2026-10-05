@@ -31,7 +31,7 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 
 class SettingsPayload(BaseModel):
-    model: Optional[str] = "small"
+    model: Optional[str] = "base" if os.environ.get("RENDER") else "small"
     threads: Optional[int] = os.cpu_count() or 4
     language: Optional[str] = "en"
 

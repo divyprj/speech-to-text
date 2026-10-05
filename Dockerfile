@@ -20,8 +20,8 @@ RUN pip install --no-cache-dir torch torchaudio --index-url https://download.pyt
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Pre-download Whisper Small model during image build so startup is instant
-RUN python -c "import whisper; whisper.load_model('small')"
+# Pre-download Whisper Base model during image build (lightweight, fits Render 512MB free tier)
+RUN python -c "import whisper; whisper.load_model('base')"
 
 # Copy application files
 COPY . .
