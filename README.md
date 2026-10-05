@@ -1,6 +1,28 @@
-# Local Offline Speech-to-Text (STT) Solution
+# Local Offline Speech-to-Text (STT) Platform
 
-An open-source, completely offline Speech-to-Text (STT) system engineered for high accuracy, low latency, and efficient CPU execution. This repository implements an end-to-end pipeline featuring **OpenAI Whisper (Small)**, a diverse benchmark dataset of 50 speech samples, automated transcription with resource profiling (CPU time, memory RSS, Real-Time Factor), and comprehensive evaluation metrics via JiWER.
+[![Release](https://img.shields.io/github/v/release/divyprj/speech-to-text?color=5b8cff&style=flat-square)](https://github.com/divyprj/speech-to-text/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-34d399.svg?style=flat-square)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg?style=flat-square)](https://www.python.org/)
+[![Whisper Small](https://img.shields.io/badge/Whisper-Small%20(244M)-purple.svg?style=flat-square)](https://github.com/openai/whisper)
+[![100% Offline](https://img.shields.io/badge/Privacy-100%25%20Offline-green.svg?style=flat-square)](.)
+
+An enterprise-grade, completely offline Speech-to-Text system engineered for high accuracy, low latency, and efficient multi-core CPU execution. Powered by **OpenAI Whisper**, featuring an interactive audio-synchronized transcript player, live waveform dictation, sequential batch upload queue, and an automated 50-sample Harvard sentences benchmark suite.
+
+---
+
+### Interface Preview
+
+![Interactive Synced Audio Player](screenshots/06_transcription_synced.png)
+
+<p align="center">
+  <img src="screenshots/01_dictate_tab.png" width="49%" alt="Voice Dictation" />
+  <img src="screenshots/03_quality_tab.png" width="49%" alt="Benchmark Quality Analytics" />
+</p>
+
+<p align="center">
+  <img src="screenshots/07_transcript_search.png" width="49%" alt="In-Page Search" />
+  <img src="screenshots/04_settings_tab.png" width="49%" alt="CPU Settings" />
+</p>
 
 ---
 
