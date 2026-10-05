@@ -68,8 +68,8 @@ def open_browser():
 
 
 def main():
-    host = "127.0.0.1"
-    port = 8765
+    host = os.environ.get("HOST", "0.0.0.0" if os.environ.get("PORT") else "127.0.0.1")
+    port = int(os.environ.get("PORT", "8765"))
     print("="*65)
     print("              LOCAL TRANSCRIBER - OFFLINE SPEECH-TO-TEXT        ")
     print("="*65)
@@ -78,8 +78,9 @@ def main():
     print(f" Static Assets     : {STATIC_DIR}")
     print("="*65 + "\n")
 
-    # Launch browser thread
-    threading.Thread(target=open_browser, daemon=True).start()
+    # Launch browser thread only in local interactive sessions
+    if not os.environ.get("PORT"):
+        threading.Thread(target=open_browser, daemon=True).start()
 
     # Start server with direct app instance
     uvicorn.run(app, host=host, port=port, log_level="info")
