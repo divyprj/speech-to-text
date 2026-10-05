@@ -33,7 +33,9 @@ class ModelManager:
     def __init__(self):
         self.active_model_name = None
         self.active_model = None
-        self.cpu_threads = os.cpu_count() or 4
+        is_cloud = bool(os.environ.get("RENDER") or os.environ.get("PORT"))
+        # In cloud containers (Render 512MB RAM free tier), restrict threads to 2 to minimize memory allocation
+        self.cpu_threads = min(2, os.cpu_count() or 1) if is_cloud else (os.cpu_count() or 4)
         torch.set_num_threads(self.cpu_threads)
 
     @classmethod
@@ -50,8 +52,16 @@ class ModelManager:
 
     def get_model(self, model_name: str = None):
         """Load or return the cached Whisper model, freeing prior models if different."""
-        if not model_name:
-            model_name = "base" if os.environ.get("RENDER") else "small"
+        is_cloud = bool(os.environ.get("RENDER") or os.environ.get("PORT"))
+        
+        # In memory-constrained cloud environments (e.g. Render 512MB limit),
+        # safely clamp requests to 'base' or 'tiny' so container never exceeds memory
+        if is_cloud:
+            if not model_name or model_name in ["small", "medium", "large"]:
+                model_name = "base"
+        elif not model_name:
+            model_name = "small"
+
         with self._lock:
             if self.active_model is not None and self.active_model_name == model_name:
                 return self.active_model
@@ -68,6 +78,7 @@ class ModelManager:
             self.active_model_name = model_name
             t1 = time.perf_counter()
             print(f"[ModelManager] Model '{model_name}' loaded in {t1 - t0:.2f}s", flush=True)
+            gc.collect()
 
             return self.active_model
 
@@ -106,7 +117,9 @@ class WhisperEngine:
         if language and language != "auto":
             transcribe_args["language"] = language
 
+        gc.collect()
         result = model.transcribe(**transcribe_args)
+        gc.collect()
 
         latency = time.perf_counter() - t_start
         cpu_time = time.process_time() - cpu_start

@@ -1195,6 +1195,10 @@ async function loadSystemInfo() {
     document.getElementById("sysProcRam").innerText = `${data.process_ram_mb} MB`;
 
     document.getElementById("settingsModel").value = data.active_model;
+    const fileModelEl = document.getElementById("fileModelSelect");
+    if (fileModelEl) {
+      fileModelEl.value = data.active_model;
+    }
     const threadEl = document.getElementById("settingsThreads");
     if (threadEl && data.configured_threads) {
       const exists = Array.from(threadEl.options).some(o => o.value == data.configured_threads);

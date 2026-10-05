@@ -86,9 +86,11 @@ def update_settings(payload: SettingsPayload):
 @router.post("/transcribe")
 async def transcribe_audio_file(
     file: UploadFile = File(...),
-    model: str = Form("small"),
+    model: str = Form(None),
     language: str = Form("en")
 ):
+    is_cloud = bool(os.environ.get("RENDER") or os.environ.get("PORT"))
+    chosen_model = model or ("base" if is_cloud else "small")
     safe_name = os.path.basename(file.filename or "upload.wav")
     dest_path = UPLOAD_DIR / safe_name
     with open(dest_path, "wb") as buffer:
@@ -98,7 +100,7 @@ async def transcribe_audio_file(
     job = jq.submit_job(
         filename=safe_name,
         filepath=str(dest_path),
-        model=model,
+        model=chosen_model,
         language=language
     )
     return {"job_id": job.id, "status": job.status, "filename": safe_name}
@@ -107,10 +109,12 @@ async def transcribe_audio_file(
 @router.post("/record")
 async def transcribe_recorded_audio(
     file: UploadFile = File(...),
-    model: str = Form("small"),
+    model: str = Form(None),
     language: str = Form("en")
 ):
     import time
+    is_cloud = bool(os.environ.get("RENDER") or os.environ.get("PORT"))
+    chosen_model = model or ("base" if is_cloud else "small")
     timestamp = int(time.time())
     safe_name = f"voice_dictation_{timestamp}.webm"
     dest_path = UPLOAD_DIR / safe_name
@@ -121,7 +125,7 @@ async def transcribe_recorded_audio(
     job = jq.submit_job(
         filename=safe_name,
         filepath=str(dest_path),
-        model=model,
+        model=chosen_model,
         language=language
     )
     return {"job_id": job.id, "status": job.status, "filename": safe_name}
