@@ -1,0 +1,51 @@
+audio_file,duration_sec,reference,hypothesis,wer,cer,latency_sec,cpu_time_sec,rtf_factor,memory_rss_mb
+sample_001.wav,3.13,The birch canoe slid on the smooth planks.,The birch canoe slid on the smooth planks.,0.0,0.0,2.718,34.766,1.15,1212.6
+sample_002.wav,2.98,Glue the sheet to the dark blue background.,Glue the sheet to the dark blue background.,0.0,0.0,1.734,25.969,1.72,1250.8
+sample_003.wav,2.89,Four hours of steady work faced us.,Four hours of steady work faced us.,0.0,0.0,1.719,25.984,1.68,1206.7
+sample_004.wav,3.25,A large size in stockings is hard to sell.,A large size in stockings is hard to sell.,0.0,0.0,1.817,27.516,1.79,1202.3
+sample_005.wav,2.55,The boy was there when the sun rose.,The boy was there when the sun rose.,0.0,0.0,1.788,26.422,1.43,1202.6
+sample_006.wav,2.85,A rod is used to catch pink salmon.,A rod is used to catch pink salmon.,0.0,0.0,1.868,26.578,1.53,1221.0
+sample_007.wav,3.26,The source of the huge river is the clear spring.,The source of the huge river is the clear spring.,0.0,0.0,1.737,26.719,1.88,1201.4
+sample_008.wav,2.54,Kick the ball straight into the goal.,Kick the ball straight into the goal.,0.0,0.0,1.648,24.797,1.54,1203.3
+sample_009.wav,3.12,The jacket hangs on the wooden hook near the door.,The jacket hangs on the wooden hook near the door.,0.0,0.0,1.791,27.266,1.74,1203.0
+sample_010.wav,3.05,Two blue fish swam through the cold water.,Two bluefish swam through the cold water.,0.25,0.0244,1.738,26.391,1.76,1208.7
+sample_011.wav,3.88,Could you please explain how to reset my account password?,Could you please explain how to reset my account password?,0.0,0.0,1.786,27.062,2.17,1222.7
+sample_012.wav,4.22,What is the expected delivery date for order number nine four two?,What is the expected delivery date for order number 942?,0.25,0.2,1.793,27.531,2.35,1209.3
+sample_013.wav,5.16,Please turn off the living room lights and set the thermostat to seventy degrees.,Please turn off the living room lights and set the thermostat to 70 degrees.,0.0714,0.0875,1.898,29.516,2.72,1217.8
+sample_014.wav,4.51,Can you check if there are any available flights to Chicago tomorrow morning?,Can you check if there are any available flights to Chicago tomorrow morning?,0.0,0.0,1.903,28.625,2.37,1206.3
+sample_015.wav,5.0,I would like to schedule an appointment with the doctor next Tuesday at two o'clock.,I would like to schedule an appointment with the doctor next Tuesday at 2 o'clock.,0.0667,0.0366,2.123,31.406,2.36,1228.4
+sample_016.wav,6.44,"Hello, thank you for calling customer service. How may I direct your call today?","Hello, thank you for calling customer service. How may I direct your call today?",0.0,0.0,2.08,32.031,3.1,1224.1
+sample_017.wav,4.77,Show me the top five trending songs on the international billboard chart.,Show me the top 5 trending songs on the international Billboard chart.,0.0833,0.0556,1.874,28.203,2.55,1223.2
+sample_018.wav,5.05,Remind me to submit the quarterly financial spreadsheet before Friday evening.,Remind me to submit the quarterly financial spreadsheet before Friday evening.,0.0,0.0,2.295,30.828,2.2,1209.9
+sample_019.wav,4.59,Where is the nearest electric vehicle charging station in this neighborhood?,Where is the nearest electric vehicle charging station in this neighborhood?,0.0,0.0,2.285,29.75,2.01,1223.6
+sample_020.wav,5.32,Can you summarize the main conclusions of this research paper in three bullet points?,Can you summarize the main conclusions of this research paper in three bullet points?,0.0,0.0,1.983,29.109,2.68,1206.6
+sample_021.wav,5.78,The company revenue increased by fifteen percent to four million eight hundred thousand dollars.,"The company revenue increased by 15% to $4,800,000.",0.5714,0.6105,2.25,32.531,2.57,1221.7
+sample_022.wav,4.71,Her flight arrives on October twenty fourth at gate number forty seven.,Her flight arrives on October 24 at gate number 47.,0.3333,0.3429,2.034,28.609,2.32,1219.4
+sample_023.wav,5.09,The transaction identification code is seven eight nine dash five four three.,The transaction identification code is 789-543.,0.5833,0.4868,1.964,28.453,2.59,1204.7
+sample_024.wav,5.52,Please confirm the balance transfer of twelve hundred dollars from account five zero one.,Please confirm the balance transfer of $1200 from account 501.,0.4286,0.3977,2.092,29.656,2.64,1220.7
+sample_025.wav,5.73,Inflation fell from seven point eight percent to three point two percent over twelve months.,Inflation fell from 7.8% to 3.2% over 12 months.,0.6,0.5934,2.101,31.578,2.73,1224.7
+sample_026.wav,4.36,The customer phone number is five five five zero one nine eight.,The customer phone number is 5550198.,0.5833,0.5397,2.097,28.438,2.08,1219.2
+sample_027.wav,5.52,Total assets under management reached twelve point five billion dollars in the third quarter.,Total assets under management reached $12.5 billion in the third quarter.,0.2857,0.2717,2.129,29.984,2.59,1204.6
+sample_028.wav,5.02,The meeting is confirmed for November sixteenth from nine thirty to eleven o'clock.,The meeting is confirmed for November 16 from 9.30 to 11.00.,0.3846,0.4074,2.154,31.281,2.33,1223.5
+sample_029.wav,4.64,Our office is located at suite seven hundred on eighty fifth avenue.,Our office is located at Suite 700 on 85th Avenue.,0.3333,0.3433,1.987,28.547,2.34,1206.3
+sample_030.wav,5.05,The stock index dropped twenty eight points closing at four thousand three hundred.,"The stock index dropped 28 points closing at 4,300.",0.4615,0.4756,2.229,30.484,2.27,1223.0
+sample_031.wav,5.41,Artificial intelligence models require extensive training on diverse datasets.,Artificial intelligence models require extensive training on diverse datasets.,0.0,0.0,1.984,28.5,2.73,1224.5
+sample_032.wav,5.68,Quantization reduces memory footprint and accelerates CPU inference significantly.,Quantization reduces memory footprint and accelerates CPU inference significantly.,0.0,0.0,2.037,29.609,2.79,1209.8
+sample_033.wav,5.06,The microservices architecture communicates through secure lightweight APIs.,The microservices architecture communicates through secure lightweight APIs.,0.0,0.0,2.316,30.578,2.18,1220.0
+sample_034.wav,5.15,Word error rate measures the proportion of substitutions deletions and insertions.,"Word error rate measures the proportion of substitutions, deletions and insertions.",0.0,0.0,2.283,32.047,2.25,1211.6
+sample_035.wav,5.32,The transformer encoder processes acoustic features through self-attention layers.,The transformer encoder processes acoustic features through self-attention layers.,0.0,0.0,2.155,30.344,2.47,1224.6
+sample_036.wav,5.31,Linear algebra operations are optimized with vector instructions and multi-threading.,Linear algebra operations are optimized with vector instructions and multi-threading.,0.0,0.0,2.59,32.0,2.05,1206.5
+sample_037.wav,5.67,The database query executed within twelve milliseconds utilizing indexed columns.,The database query executed within 12 milliseconds utilizing indexed columns.,0.1,0.075,2.448,29.25,2.32,1223.1
+sample_038.wav,5.94,Continuous integration pipelines run unit tests and static code analysis automatically.,Continuous integration pipelines run unit tests and static code analysis automatically.,0.0,0.0,2.191,28.797,2.71,1218.8
+sample_039.wav,5.9,Spectrogram features are converted to mel frequency filter banks for acoustic analysis.,Spectrogram features are converted to Mell frequency filter banks for acoustic analysis.,0.0833,0.0116,2.068,30.766,2.85,1224.0
+sample_040.wav,5.26,Asynchronous network sockets enable high throughput and concurrent connection handling.,Asynchronous network sockets enable high throughput and concurrent connection handling.,0.0,0.0,2.084,28.844,2.52,1205.2
+sample_041.wav,4.15,Please hurry up and download the latest software update before the server reboots.,Please hurry up and download the latest software update before the server reboots.,0.0,0.0,2.02,30.0,2.05,1219.1
+sample_042.wav,3.7,Quickly verify that all security protocols are strictly followed throughout the system.,Quickly verify that all security protocols are strictly followed throughout the system.,0.0,0.0,2.013,29.188,1.84,1209.8
+sample_043.wav,6.47,Take your time and carefully read every instruction printed in this detailed manual.,Take your time and carefully read every instruction printed in this detailed manual.,0.0,0.0,1.975,29.453,3.28,1219.1
+sample_044.wav,6.59,Speak clearly and pronounce each syllable deliberately to ensure accurate transcription.,Speak clearly and pronounce each syllable deliberately to ensure accurate transcription.,0.0,0.0,2.051,29.406,3.21,1206.7
+sample_045.wav,4.11,The rapid development of open source software has transformed modern technology.,The rapid development of open source software has transformed modern technology.,0.0,0.0,1.984,28.875,2.07,1206.4
+sample_046.wav,4.36,The captain ordered the crew to lower the sails as the storm approached.,The captain ordered the crew to lower the sails as the storm approached.,0.0,0.0,2.331,32.547,1.87,1224.9
+sample_047.wav,5.97,Modern automated speech recognition systems remain remarkably robust in noisy environments.,Modern automated speech recognition systems remain remarkably robust in noisy environments.,0.0,0.0,2.126,29.844,2.81,1209.6
+sample_048.wav,5.48,Heavy rain and distant thunder created continuous background noise during the recording.,Heavy rain and distant thunder created continuous background noise during the recording.,0.0,0.0,2.087,29.703,2.63,1223.3
+sample_049.wav,6.17,Coffee shops and open office spaces present significant acoustic challenges for microphones.,Coffee shops and open office spaces present significant acoustic challenges for microphones.,0.0,0.0,2.1,29.672,2.94,1219.2
+sample_050.wav,6.25,Evaluation metrics like word error rate determine how effectively filters eliminate interference.,Evaluation metrics like word error rate determine how effectively filters eliminate interference.,0.0,0.0,2.224,31.141,2.81,1229.0

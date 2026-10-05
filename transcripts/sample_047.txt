@@ -1,0 +1,1 @@
+Modern automated speech recognition systems remain remarkably robust in noisy environments.

@@ -1,0 +1,41 @@
+================================================================================
+                 LOCAL SPEECH-TO-TEXT EVALUATION REPORT                         
+================================================================================
+ Total Samples Evaluated    : 50
+ Total Audio Duration       : 237.93 seconds (3.97 minutes)
+ Total Wall-Clock Latency   : 102.68 seconds
+ Total CPU Processing Time  : 1466.59 seconds
+ Overall Processing Speed   : 2.32x Real-Time (audio duration / wall time)
+
+--- ACCURACY METRICS (JIWER) ---
+ Word Error Rate (WER)      : 12.52%
+ Character Error Rate (CER) : 10.98%
+ Match Error Rate (MER)     : 12.52%
+ Word Info Lost (WIL)       : 16.94%
+ Word Info Preserved (WIP)  : 83.06%
+
+--- LATENCY & THROUGHPUT (CPU) ---
+ Mean Latency / Sample      : 2.054 s
+ Median Latency             : 2.059 s
+ Latency Std Dev            : 0.222 s
+ Min Latency                : 1.648 s
+ Max Latency                : 2.718 s
+ Mean Real-Time Factor (RTF): 2.31x
+
+--- RESOURCE UTILIZATION (CPU & RAM) ---
+ Mean Memory Usage (RSS)    : 1215.75 MB
+ Peak Memory Usage (RSS)    : 1250.80 MB
+
+--- CATEGORICAL PERFORMANCE BREAKDOWN ---
+| Category            |   Count | WER    | CER    | Avg Latency   | Avg RTF   |
+|---------------------|---------|--------|--------|---------------|-----------|
+| Conversational      |      10 | 4.76%  | 3.62%  | 2.002s        | 2.45x     |
+| Fast Speech         |       3 | 0.00%  | 0.00%  | 2.006s        | 1.99x     |
+| Harvard Sentence    |      10 | 2.41%  | 0.25%  | 1.856s        | 1.62x     |
+| Noisy (Heavy)       |       2 | 0.00%  | 0.00%  | 2.155s        | 2.72x     |
+| Noisy (Mild)        |       1 | 0.00%  | 0.00%  | 2.331s        | 1.87x     |
+| Noisy (Moderate)    |       2 | 0.00%  | 0.00%  | 2.113s        | 2.88x     |
+| Numeric & Financial |      10 | 45.80% | 44.97% | 2.104s        | 2.45x     |
+| Slow Speech         |       2 | 0.00%  | 0.00%  | 2.013s        | 3.25x     |
+| Technical           |      10 | 2.02%  | 0.86%  | 2.216s        | 2.49x     |
+================================================================================

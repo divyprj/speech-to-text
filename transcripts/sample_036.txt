@@ -1,0 +1,1 @@
+Linear algebra operations are optimized with vector instructions and multi-threading.

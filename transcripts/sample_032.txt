@@ -1,0 +1,1 @@
+Quantization reduces memory footprint and accelerates CPU inference significantly.

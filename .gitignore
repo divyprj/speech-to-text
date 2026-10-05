@@ -1,0 +1,24 @@
+# Environments
+stt-env/
+venv/
+env/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Large temporary audio files
+data/uploads/*
+!data/uploads/.gitkeep
+priyanka_chopra_speech.mp3
+*.mp3
+
+# Logs & scratch
+*.log
+scratch/
+.idea/
+.vscode/

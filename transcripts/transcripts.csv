@@ -1,0 +1,51 @@
+filename,transcript_file,reference_transcript,duration_sec,speaker_voice,speech_rate,noise_level,category
+sample_001.wav,sample_001.txt,The birch canoe slid on the smooth planks.,3.13,Microsoft David Desktop,0,0.0,Harvard Sentence
+sample_002.wav,sample_002.txt,Glue the sheet to the dark blue background.,2.98,Microsoft Zira Desktop,0,0.0,Harvard Sentence
+sample_003.wav,sample_003.txt,Four hours of steady work faced us.,2.89,Microsoft David Desktop,0,0.0,Harvard Sentence
+sample_004.wav,sample_004.txt,A large size in stockings is hard to sell.,3.25,Microsoft Zira Desktop,0,0.0,Harvard Sentence
+sample_005.wav,sample_005.txt,The boy was there when the sun rose.,2.55,Microsoft David Desktop,0,0.0,Harvard Sentence
+sample_006.wav,sample_006.txt,A rod is used to catch pink salmon.,2.85,Microsoft Zira Desktop,0,0.0,Harvard Sentence
+sample_007.wav,sample_007.txt,The source of the huge river is the clear spring.,3.26,Microsoft David Desktop,0,0.0,Harvard Sentence
+sample_008.wav,sample_008.txt,Kick the ball straight into the goal.,2.54,Microsoft Zira Desktop,0,0.0,Harvard Sentence
+sample_009.wav,sample_009.txt,The jacket hangs on the wooden hook near the door.,3.12,Microsoft David Desktop,0,0.0,Harvard Sentence
+sample_010.wav,sample_010.txt,Two blue fish swam through the cold water.,3.05,Microsoft Zira Desktop,0,0.0,Harvard Sentence
+sample_011.wav,sample_011.txt,Could you please explain how to reset my account password?,3.88,Microsoft David Desktop,0,0.0,Conversational
+sample_012.wav,sample_012.txt,What is the expected delivery date for order number nine four two?,4.22,Microsoft Zira Desktop,0,0.0,Conversational
+sample_013.wav,sample_013.txt,Please turn off the living room lights and set the thermostat to seventy degrees.,5.16,Microsoft David Desktop,0,0.0,Conversational
+sample_014.wav,sample_014.txt,Can you check if there are any available flights to Chicago tomorrow morning?,4.51,Microsoft Zira Desktop,0,0.0,Conversational
+sample_015.wav,sample_015.txt,I would like to schedule an appointment with the doctor next Tuesday at two o'clock.,5.0,Microsoft David Desktop,0,0.0,Conversational
+sample_016.wav,sample_016.txt,"Hello, thank you for calling customer service. How may I direct your call today?",6.44,Microsoft Zira Desktop,0,0.0,Conversational
+sample_017.wav,sample_017.txt,Show me the top five trending songs on the international billboard chart.,4.77,Microsoft David Desktop,0,0.0,Conversational
+sample_018.wav,sample_018.txt,Remind me to submit the quarterly financial spreadsheet before Friday evening.,5.05,Microsoft Zira Desktop,0,0.0,Conversational
+sample_019.wav,sample_019.txt,Where is the nearest electric vehicle charging station in this neighborhood?,4.59,Microsoft David Desktop,0,0.0,Conversational
+sample_020.wav,sample_020.txt,Can you summarize the main conclusions of this research paper in three bullet points?,5.32,Microsoft Zira Desktop,0,0.0,Conversational
+sample_021.wav,sample_021.txt,The company revenue increased by fifteen percent to four million eight hundred thousand dollars.,5.78,Microsoft David Desktop,0,0.0,Numeric & Financial
+sample_022.wav,sample_022.txt,Her flight arrives on October twenty fourth at gate number forty seven.,4.71,Microsoft Zira Desktop,0,0.0,Numeric & Financial
+sample_023.wav,sample_023.txt,The transaction identification code is seven eight nine dash five four three.,5.09,Microsoft David Desktop,0,0.0,Numeric & Financial
+sample_024.wav,sample_024.txt,Please confirm the balance transfer of twelve hundred dollars from account five zero one.,5.52,Microsoft Zira Desktop,0,0.0,Numeric & Financial
+sample_025.wav,sample_025.txt,Inflation fell from seven point eight percent to three point two percent over twelve months.,5.73,Microsoft David Desktop,0,0.0,Numeric & Financial
+sample_026.wav,sample_026.txt,The customer phone number is five five five zero one nine eight.,4.36,Microsoft Zira Desktop,0,0.0,Numeric & Financial
+sample_027.wav,sample_027.txt,Total assets under management reached twelve point five billion dollars in the third quarter.,5.52,Microsoft David Desktop,0,0.0,Numeric & Financial
+sample_028.wav,sample_028.txt,The meeting is confirmed for November sixteenth from nine thirty to eleven o'clock.,5.02,Microsoft Zira Desktop,0,0.0,Numeric & Financial
+sample_029.wav,sample_029.txt,Our office is located at suite seven hundred on eighty fifth avenue.,4.64,Microsoft David Desktop,0,0.0,Numeric & Financial
+sample_030.wav,sample_030.txt,The stock index dropped twenty eight points closing at four thousand three hundred.,5.05,Microsoft Zira Desktop,0,0.0,Numeric & Financial
+sample_031.wav,sample_031.txt,Artificial intelligence models require extensive training on diverse datasets.,5.41,Microsoft David Desktop,0,0.0,Technical
+sample_032.wav,sample_032.txt,Quantization reduces memory footprint and accelerates CPU inference significantly.,5.68,Microsoft Zira Desktop,0,0.0,Technical
+sample_033.wav,sample_033.txt,The microservices architecture communicates through secure lightweight APIs.,5.06,Microsoft David Desktop,0,0.0,Technical
+sample_034.wav,sample_034.txt,Word error rate measures the proportion of substitutions deletions and insertions.,5.15,Microsoft Zira Desktop,0,0.0,Technical
+sample_035.wav,sample_035.txt,The transformer encoder processes acoustic features through self-attention layers.,5.32,Microsoft David Desktop,0,0.0,Technical
+sample_036.wav,sample_036.txt,Linear algebra operations are optimized with vector instructions and multi-threading.,5.31,Microsoft Zira Desktop,0,0.0,Technical
+sample_037.wav,sample_037.txt,The database query executed within twelve milliseconds utilizing indexed columns.,5.67,Microsoft David Desktop,0,0.0,Technical
+sample_038.wav,sample_038.txt,Continuous integration pipelines run unit tests and static code analysis automatically.,5.94,Microsoft Zira Desktop,0,0.0,Technical
+sample_039.wav,sample_039.txt,Spectrogram features are converted to mel frequency filter banks for acoustic analysis.,5.9,Microsoft David Desktop,0,0.0,Technical
+sample_040.wav,sample_040.txt,Asynchronous network sockets enable high throughput and concurrent connection handling.,5.26,Microsoft Zira Desktop,0,0.0,Technical
+sample_041.wav,sample_041.txt,Please hurry up and download the latest software update before the server reboots.,4.15,Microsoft David Desktop,2,0.0,Fast Speech
+sample_042.wav,sample_042.txt,Quickly verify that all security protocols are strictly followed throughout the system.,3.7,Microsoft Zira Desktop,3,0.0,Fast Speech
+sample_043.wav,sample_043.txt,Take your time and carefully read every instruction printed in this detailed manual.,6.47,Microsoft David Desktop,-2,0.0,Slow Speech
+sample_044.wav,sample_044.txt,Speak clearly and pronounce each syllable deliberately to ensure accurate transcription.,6.59,Microsoft Zira Desktop,-2,0.0,Slow Speech
+sample_045.wav,sample_045.txt,The rapid development of open source software has transformed modern technology.,4.11,Microsoft David Desktop,2,0.0,Fast Speech
+sample_046.wav,sample_046.txt,The captain ordered the crew to lower the sails as the storm approached.,4.36,Microsoft David Desktop,0,0.015,Noisy (Mild)
+sample_047.wav,sample_047.txt,Modern automated speech recognition systems remain remarkably robust in noisy environments.,5.97,Microsoft Zira Desktop,0,0.025,Noisy (Moderate)
+sample_048.wav,sample_048.txt,Heavy rain and distant thunder created continuous background noise during the recording.,5.48,Microsoft David Desktop,0,0.035,Noisy (Heavy)
+sample_049.wav,sample_049.txt,Coffee shops and open office spaces present significant acoustic challenges for microphones.,6.17,Microsoft Zira Desktop,0,0.02,Noisy (Moderate)
+sample_050.wav,sample_050.txt,Evaluation metrics like word error rate determine how effectively filters eliminate interference.,6.25,Microsoft David Desktop,0,0.04,Noisy (Heavy)

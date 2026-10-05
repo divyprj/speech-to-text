@@ -1,0 +1,2 @@
+audio_file,duration_sec,reference,hypothesis,wer,cer,latency_sec,cpu_time_sec,rtf_factor,memory_rss_mb
+sample_001.wav,3.13,The birch canoe slid on the smooth planks.,The birch can use lid on the smooth planks.,0.375,0.0976,2.383,7.672,1.31,682.2

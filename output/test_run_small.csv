@@ -1,0 +1,2 @@
+audio_file,duration_sec,reference,hypothesis,wer,cer,latency_sec,cpu_time_sec,rtf_factor,memory_rss_mb
+sample_001.wav,3.13,The birch canoe slid on the smooth planks.,The birch canoe slid on the smooth planks.,0.0,0.0,3.628,20.906,0.86,1177.7

@@ -1,0 +1,1 @@
+Continuous integration pipelines run unit tests and static code analysis automatically.

@@ -1,0 +1,1 @@
+Quickly verify that all security protocols are strictly followed throughout the system.

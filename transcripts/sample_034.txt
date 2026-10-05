@@ -1,0 +1,1 @@
+Word error rate measures the proportion of substitutions deletions and insertions.

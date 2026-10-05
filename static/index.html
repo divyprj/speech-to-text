@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Transcriber</title>
+  <link rel="stylesheet" href="/static/css/style.css?v=2.2">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+    <a href="#" class="brand">
+      <div class="brand-icon">
+        <svg class="svg-icon" viewBox="0 0 24 24">
+          <rect x="9" y="3.5" width="6" height="11" rx="3" />
+          <path d="M6.5 11.5a5.5 5.5 0 0 0 11 0" />
+          <path d="M12 17v3.5" />
+          <path d="M9 20.5h6" />
+        </svg>
+      </div>
+      <span class="brand-title">Local Transcriber</span>
+    </a>
+
+    <!-- Center Navigation Segmented Pills -->
+    <nav class="nav-pills">
+      <div class="nav-tab active" data-tab="tab-dictation">
+        <svg class="svg-icon icon-nav" viewBox="0 0 24 24">
+          <rect x="9" y="3.5" width="6" height="11" rx="3" />
+          <path d="M6.5 11.5a5.5 5.5 0 0 0 11 0" />
+          <path d="M12 17v3.5" />
+          <path d="M9 20.5h6" />
+        </svg>
+        <span>Dictate</span>
+      </div>
+
+      <div class="nav-tab" data-tab="tab-files">
+        <svg class="svg-icon icon-nav" viewBox="0 0 24 24">
+          <path d="M3.5 7.5A2 2 0 0 1 5.5 5.5H10L12 7.5H18.5A2 2 0 0 1 20.5 9.5V17.5A2 2 0 0 1 18.5 19.5H5.5A2 2 0 0 1 3.5 17.5Z" />
+        </svg>
+        <span>Files</span>
+      </div>
+
+      <div class="nav-tab" data-tab="tab-quality">
+        <svg class="svg-icon icon-nav" viewBox="0 0 24 24">
+          <path d="M5 19V10" />
+          <path d="M12 19V5" />
+          <path d="M19 19v-7" />
+        </svg>
+        <span>Quality</span>
+      </div>
+
+      <div class="nav-tab" data-tab="tab-settings">
+        <svg class="svg-icon icon-nav" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3" />
+          <path d="M19 13.5a7.5 7.5 0 0 0 0-3l1.7-1.2-2-3.4-1.9.8a7.7 7.7 0 0 0-2.6-1.5L14 3h-4l-.3 2.2A7.7 7.7 0 0 0 7.1 6.7L5.2 5.9l-2 3.4L5 10.5a7.5 7.5 0 0 0 0 3l-1.8 1.2 2 3.4 1.9-.8a7.7 7.7 0 0 0 2.6 1.5L10 21h4l.3-2.2a7.7 7.7 0 0 0 2.6-1.5l1.9.8 2-3.4Z" />
+        </svg>
+        <span>Settings</span>
+      </div>
+    </nav>
+
+    <!-- Top Right Status Pill -->
+    <div class="status-pill">
+      <span class="status-dot"></span>
+      <span id="globalStatus">Ready</span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- TAB 1: Voice Dictation -->
+    <section id="tab-dictation" class="tab-pane active">
+      <div class="page-header">
+        <h1 class="page-title">Dictate</h1>
+        <p class="page-description">Speak naturally and turn your voice into text.</p>
+      </div>
+
+      <div class="surface dictation-hero">
+        <div class="record-halo">
+          <div class="record-pulse-ring" id="pulseRing"></div>
+          <button class="record-btn" id="recordBtn" aria-label="Toggle recording">
+            <svg class="svg-icon icon-xl" id="micIconSvg" viewBox="0 0 24 24">
+              <rect x="9" y="3.5" width="6" height="11" rx="3" />
+              <path d="M6.5 11.5a5.5 5.5 0 0 0 11 0" />
+              <path d="M12 17v3.5" />
+              <path d="M9 20.5h6" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="timer" id="recordTimer">00:00</div>
+        <div class="status-hint" id="recordStatus">Ready when you are</div>
+
+        <!-- Real-time Waveform Canvas -->
+        <div class="waveform-box" id="canvasContainer">
+          <canvas id="waveformCanvas" width="480" height="52"></canvas>
+        </div>
+
+        <!-- Hidden Audio Element for Dictation -->
+        <audio id="recordedAudioPlayer" style="display: none;"></audio>
+
+        <!-- Audio Player Preview & Controls -->
+        <div class="audio-preview-card" id="dictationAudioPreview" style="display: none;">
+          <div class="custom-audio-bar" id="dictationAudioBar">
+            <button class="player-btn-play" id="dictationPlayBtn" aria-label="Play recording">
+              <svg class="svg-icon icon-filled" viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5-9-5.5Z" /></svg>
+            </button>
+            <div class="player-time-display">
+              <span class="player-time-current" id="dictationCurrentTime">00:00</span>
+              <span style="opacity: 0.5;">/</span>
+              <span id="dictationDuration">00:00</span>
+            </div>
+            <div class="player-scrubber-box">
+              <input type="range" class="player-scrubber" id="dictationScrubber" min="0" max="100" value="0" step="0.1">
+            </div>
+            <div class="player-speed-group" id="dictationSpeedGroup">
+              <button class="speed-pill-btn" data-speed="0.75">0.75×</button>
+              <button class="speed-pill-btn active" data-speed="1">1×</button>
+              <button class="speed-pill-btn" data-speed="1.25">1.25×</button>
+              <button class="speed-pill-btn" data-speed="1.5">1.5×</button>
+              <button class="speed-pill-btn" data-speed="2">2×</button>
+            </div>
+          </div>
+
+          <div style="margin-top: 8px;">
+            <button class="btn-primary" id="transcribeRecordedBtn">
+              <svg class="svg-icon icon-filled" viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5-9-5.5Z" /></svg>
+              <span>Transcribe Recording</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Progress Box -->
+        <div class="progress-card" id="dictationProgress" style="display: none;">
+          <div class="progress-header">
+            <span id="dictationProgressMsg">Processing speech...</span>
+            <span id="dictationProgressPct">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="dictationProgressBar"></div>
+          </div>
+        </div>
+
+        <!-- Document Transcript Output -->
+        <div class="transcript-card" id="dictationResultBox" style="display: none;">
+          <div class="transcript-header">
+            <div class="transcript-label">
+              <svg class="svg-icon icon-sm" viewBox="0 0 24 24">
+                <path d="M7 3.5h6l4 4v13H7z" />
+                <path d="M13 3.5v4h4" />
+                <path d="M9.5 12h5" />
+                <path d="M9.5 15.5h5" />
+              </svg>
+              <span>Transcript</span>
+            </div>
+            <div class="transcript-meta">
+              <span class="chip" id="dictationWordCount">0 words</span>
+              <span class="chip" id="dictationCharCount">0 chars</span>
+              <span class="chip chip-speed" id="dictationRtfBadge">1.8× Real-Time</span>
+            </div>
+          </div>
+
+          <!-- Mode bar: Synced Segments vs Raw Editor & Search -->
+          <div class="transcript-mode-bar">
+            <div class="transcript-tabs">
+              <button class="transcript-tab-btn active" id="dictationTabSegments" data-view="segments">
+                <svg class="svg-icon icon-xs" viewBox="0 0 24 24">
+                  <path d="M5 19V10" /><path d="M12 19V5" /><path d="M19 19v-7" />
+                </svg>
+                <span>Interactive Segments</span>
+              </button>
+              <button class="transcript-tab-btn" id="dictationTabEditor" data-view="editor">
+                <svg class="svg-icon icon-xs" viewBox="0 0 24 24">
+                  <path d="M7 3.5h6l4 4v13H7z" /><path d="M13 3.5v4h4" />
+                </svg>
+                <span>Plain Text</span>
+              </button>
+            </div>
+
+            <div class="transcript-search-wrap">
+              <svg class="svg-icon icon-xs transcript-search-icon" viewBox="0 0 24 24">
+                <circle cx="10.8" cy="10.8" r="5.8" /><path d="m15.2 15.2 4 4" />
+              </svg>
+              <input type="text" class="transcript-search-input" id="dictationSearchInput" placeholder="Search transcript...">
+              <span class="transcript-match-count" id="dictationMatchCount" style="display: none;">0 matches</span>
+            </div>
+          </div>
+
+          <!-- Segments Container (clickable & synced) -->
+          <div class="segments-container" id="dictationSegmentsList">
+            <!-- Segments populated dynamically -->
+          </div>
+
+          <!-- Fallback Raw Textarea -->
+          <textarea class="transcript-editor" id="dictationTextarea" placeholder="Your transcript will appear here..." style="display: none;"></textarea>
+
+          <div class="transcript-toolbar">
+            <button class="btn-outline" id="copyDictationBtn">
+              <svg class="svg-icon icon-sm" viewBox="0 0 24 24">
+                <rect x="8" y="8" width="11" height="11" rx="2" />
+                <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+              <span>Copy</span>
+            </button>
+
+            <div class="dropdown">
+              <button class="btn-outline" id="exportDictationMenuBtn">
+                <svg class="svg-icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M12 3.5v11" />
+                  <path d="m8.5 11 3.5 3.5 3.5-3.5" />
+                  <path d="M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2" />
+                </svg>
+                <span>Export</span>
+                <svg class="svg-icon icon-xs" viewBox="0 0 24 24"><path d="m7 9 5 5 5-5" /></svg>
+              </button>
+              <div class="dropdown-menu" id="exportDictationMenu">
+                <div class="dropdown-item" id="exportDictationTxt">Text (.txt)</div>
+                <div class="dropdown-item" id="exportDictationSrt">SubRip (.srt)</div>
+                <div class="dropdown-item" id="exportDictationVtt">WebVTT (.vtt)</div>
+                <div class="dropdown-item" id="exportDictationJson">JSON (.json)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: Audio Files -->
+    <section id="tab-files" class="tab-pane">
+      <div class="page-header">
+        <h1 class="page-title">Files</h1>
+        <p class="page-description">Transcribe audio files and edit the result.</p>
+      </div>
+
+      <div class="surface">
+        <div class="dropzone" id="fileDropzone">
+          <div class="dropzone-icon">
+            <svg class="svg-icon icon-xl" viewBox="0 0 24 24">
+              <path d="M12 15V4.5" />
+              <path d="m8.5 8 3.5-3.5L15.5 8" />
+              <path d="M5 13.5v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" />
+            </svg>
+          </div>
+          <div class="dropzone-title">Drop audio files here, or click to browse</div>
+          <div class="dropzone-hint">WAV · MP3 · M4A · FLAC · AAC · WebM · Supports multiple files</div>
+          <input type="file" id="fileInput" accept="audio/*" multiple style="display: none;">
+        </div>
+
+        <!-- Batch Queue Container -->
+        <div class="batch-queue-card" id="batchQueueCard" style="display: none;">
+          <div class="batch-queue-header">
+            <div class="batch-queue-title">
+              <svg class="svg-icon icon-sm" viewBox="0 0 24 24">
+                <path d="M12 15V4.5" /><path d="m8.5 8 3.5-3.5L15.5 8" /><path d="M5 13.5v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" />
+              </svg>
+              <span>Batch Queue</span>
+            </div>
+            <span class="chip" id="batchQueueCount">0 files</span>
+          </div>
+          <div id="batchQueueList" style="display: flex; flex-direction: column; gap: 6px;">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Selected File Preview -->
+        <div class="selected-file-panel" id="fileSelectedCard" style="display: none;">
+          <div class="file-header-row">
+            <div>
+              <span class="file-meta-title" id="selectedFileName">audio.wav</span>
+              <span class="file-meta-size" id="selectedFileSize">0.0 MB</span>
+            </div>
+            <button class="btn-outline" id="clearFileBtn">
+              <svg class="svg-icon icon-xs" viewBox="0 0 24 24"><path d="m7 7 10 10" /><path d="m17 7-10 10" /></svg>
+              <span>Remove</span>
+            </button>
+          </div>
+
+          <!-- Hidden audio element -->
+          <audio id="fileAudioPlayer" style="display: none;"></audio>
+
+          <!-- Custom Audio Bar for File Playback -->
+          <div class="custom-audio-bar" id="fileAudioBar">
+            <button class="player-btn-play" id="filePlayBtn" aria-label="Play audio">
+              <svg class="svg-icon icon-filled" viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5-9-5.5Z" /></svg>
+            </button>
+            <div class="player-time-display">
+              <span class="player-time-current" id="fileCurrentTime">00:00</span>
+              <span style="opacity: 0.5;">/</span>
+              <span id="fileDuration">00:00</span>
+            </div>
+            <div class="player-scrubber-box">
+              <input type="range" class="player-scrubber" id="fileScrubber" min="0" max="100" value="0" step="0.1">
+            </div>
+            <div class="player-speed-group" id="fileSpeedGroup">
+              <button class="speed-pill-btn" data-speed="0.75">0.75×</button>
+              <button class="speed-pill-btn active" data-speed="1">1×</button>
+              <button class="speed-pill-btn" data-speed="1.25">1.25×</button>
+              <button class="speed-pill-btn" data-speed="1.5">1.5×</button>
+              <button class="speed-pill-btn" data-speed="2">2×</button>
+            </div>
+          </div>
+
+          <div class="file-options-grid" style="margin-top: 14px;">
+            <div class="field-group">
+              <label class="field-label" for="fileModelSelect">Model</label>
+              <select id="fileModelSelect" class="select-input">
+                <option value="small" selected>Small · High accuracy</option>
+                <option value="base">Base · Balanced</option>
+                <option value="tiny">Tiny · Quick</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="fileLangSelect">Language</label>
+              <select id="fileLangSelect" class="select-input">
+                <option value="en" selected>English</option>
+                <option value="auto">Auto-Detect</option>
+              </select>
+            </div>
+            <div>
+              <button class="btn-primary" id="startFileTranscribeBtn" style="height: 38px; width: 100%;">
+                <svg class="svg-icon icon-filled" viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5-9-5.5Z" /></svg>
+                <span>Transcribe</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- File Progress -->
+        <div class="progress-card" id="fileProgressCard" style="display: none; margin-top: 18px; max-width: 100%;">
+          <div class="progress-header">
+            <span id="fileProgressMsg">Transcribing audio...</span>
+            <span id="fileProgressPct">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="fileProgressBar"></div>
+          </div>
+        </div>
+
+        <!-- File Transcript Result -->
+        <div class="transcript-card" id="fileResultBox" style="display: none;">
+          <div class="transcript-header">
+            <div class="transcript-label">
+              <svg class="svg-icon icon-sm" viewBox="0 0 24 24">
+                <path d="M7 3.5h6l4 4v13H7z" />
+                <path d="M13 3.5v4h4" />
+                <path d="M9.5 12h5" />
+                <path d="M9.5 15.5h5" />
+              </svg>
+              <span>Transcript</span>
+            </div>
+            <div class="transcript-meta">
+              <span class="chip" id="fileWordCount">0 words</span>
+              <span class="chip" id="fileCharCount">0 chars</span>
+              <span class="chip chip-speed" id="fileRtfBadge">1.8× Real-Time</span>
+            </div>
+          </div>
+
+          <!-- Mode bar: Synced Segments vs Raw Editor & Search -->
+          <div class="transcript-mode-bar">
+            <div class="transcript-tabs">
+              <button class="transcript-tab-btn active" id="fileTabSegments" data-view="segments">
+                <svg class="svg-icon icon-xs" viewBox="0 0 24 24">
+                  <path d="M5 19V10" /><path d="M12 19V5" /><path d="M19 19v-7" />
+                </svg>
+                <span>Interactive Segments</span>
+              </button>
+              <button class="transcript-tab-btn" id="fileTabEditor" data-view="editor">
+                <svg class="svg-icon icon-xs" viewBox="0 0 24 24">
+                  <path d="M7 3.5h6l4 4v13H7z" /><path d="M13 3.5v4h4" />
+                </svg>
+                <span>Plain Text</span>
+              </button>
+            </div>
+
+            <div class="transcript-search-wrap">
+              <svg class="svg-icon icon-xs transcript-search-icon" viewBox="0 0 24 24">
+                <circle cx="10.8" cy="10.8" r="5.8" /><path d="m15.2 15.2 4 4" />
+              </svg>
+              <input type="text" class="transcript-search-input" id="fileSearchInput" placeholder="Search transcript...">
+              <span class="transcript-match-count" id="fileMatchCount" style="display: none;">0 matches</span>
+            </div>
+          </div>
+
+          <!-- Segments Container (clickable & synced) -->
+          <div class="segments-container" id="fileSegmentsList">
+            <!-- Segments populated dynamically -->
+          </div>
+
+          <!-- Fallback Raw Textarea -->
+          <textarea class="transcript-editor" id="fileTextarea" placeholder="Generated text will appear here..." style="display: none;"></textarea>
+
+          <div class="transcript-toolbar">
+            <button class="btn-outline" id="copyFileBtn">
+              <svg class="svg-icon icon-sm" viewBox="0 0 24 24">
+                <rect x="8" y="8" width="11" height="11" rx="2" />
+                <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+              <span>Copy</span>
+            </button>
+
+            <div class="dropdown">
+              <button class="btn-outline" id="exportFileMenuBtn">
+                <svg class="svg-icon icon-sm" viewBox="0 0 24 24">
+                  <path d="M12 3.5v11" />
+                  <path d="m8.5 11 3.5 3.5 3.5-3.5" />
+                  <path d="M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2" />
+                </svg>
+                <span>Export</span>
+                <svg class="svg-icon icon-xs" viewBox="0 0 24 24"><path d="m7 9 5 5 5-5" /></svg>
+              </button>
+              <div class="dropdown-menu" id="exportFileMenu">
+                <div class="dropdown-item" id="exportFileTxt">Text (.txt)</div>
+                <div class="dropdown-item" id="exportFileSrt">SubRip (.srt)</div>
+                <div class="dropdown-item" id="exportFileVtt">WebVTT (.vtt)</div>
+                <div class="dropdown-item" id="exportFileJson">JSON (.json)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: Quality Analytics & Benchmarks -->
+    <section id="tab-quality" class="tab-pane">
+      <div class="page-header">
+        <h1 class="page-title">Quality</h1>
+        <p class="page-description">See how your transcription engine performs across benchmarks.</p>
+      </div>
+
+      <!-- KPI Metrics Row -->
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="metric-label">Word error rate</div>
+          <div class="metric-value">12.52%</div>
+          <div class="metric-sub">Across 50 benchmark samples</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Character error rate</div>
+          <div class="metric-value">10.98%</div>
+          <div class="metric-sub">High phonetic fidelity</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Throughput</div>
+          <div class="metric-value">1.83×</div>
+          <div class="metric-sub">Faster than real-time</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Average latency</div>
+          <div class="metric-value">2.60s</div>
+          <div class="metric-sub">Per standardized utterance</div>
+        </div>
+      </div>
+
+      <!-- Condition Breakdown (Clean Horizontal Bars) -->
+      <div class="surface" style="margin-bottom: 24px;">
+        <h2 class="section-title">Performance by Speech Condition</h2>
+        <div class="condition-chart">
+          <div class="condition-row">
+            <span class="condition-name">Clean Speech</span>
+            <div class="condition-bar-track">
+              <div class="condition-bar-fill" style="width: 2.41%;"></div>
+            </div>
+            <span class="condition-val">2.41%</span>
+          </div>
+
+          <div class="condition-row">
+            <span class="condition-name">Acoustic Noise</span>
+            <div class="condition-bar-track">
+              <div class="condition-bar-fill" style="width: 1%;"></div>
+            </div>
+            <span class="condition-val">0.00%</span>
+          </div>
+
+          <div class="condition-row">
+            <span class="condition-name">Technical Terms</span>
+            <div class="condition-bar-track">
+              <div class="condition-bar-fill" style="width: 2.02%;"></div>
+            </div>
+            <span class="condition-val">2.02%</span>
+          </div>
+
+          <div class="condition-row">
+            <span class="condition-name">Conversational</span>
+            <div class="condition-bar-track">
+              <div class="condition-bar-fill" style="width: 4.76%;"></div>
+            </div>
+            <span class="condition-val">4.76%</span>
+          </div>
+
+          <div class="condition-row">
+            <span class="condition-name">Speech Rates</span>
+            <div class="condition-bar-track">
+              <div class="condition-bar-fill" style="width: 1%;"></div>
+            </div>
+            <span class="condition-val">0.00%</span>
+          </div>
+
+          <div class="condition-row">
+            <span class="condition-name">Numeric Figures</span>
+            <div class="condition-bar-track">
+              <div class="condition-bar-fill" style="width: 45.8%; background: var(--warning);"></div>
+            </div>
+            <span class="condition-val" style="color: var(--warning);">45.80%*</span>
+          </div>
+        </div>
+
+        <div class="info-note">
+          <svg class="svg-icon icon-sm" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4" />
+            <path d="M12 8h.01" />
+          </svg>
+          <div>
+            <strong>*Benchmark Note:</strong> Numeric WER reflects Whisper's automatic inverse text normalization (converting spoken numbers like <em>"fifteen percent"</em> to <em>"15%"</em> and <em>"four point eight million dollars"</em> to <em>"$4.8 million"</em>). Traditional string edit distance counts this as substitutions, while readability is enhanced.
+          </div>
+        </div>
+      </div>
+
+      <!-- 50 Samples Dataset Explorer -->
+      <div class="surface">
+        <div class="filter-bar">
+          <div class="filter-pills">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="clean">Clean</button>
+            <button class="filter-btn" data-category="noise">Noise</button>
+            <button class="filter-btn" data-category="technical">Technical</button>
+            <button class="filter-btn" data-category="conversational">Conversational</button>
+            <button class="filter-btn" data-category="rates">Cadence</button>
+            <button class="filter-btn" data-category="numeric">Numeric</button>
+          </div>
+          <input type="text" id="benchmarkSearch" placeholder="Search samples..." class="search-input">
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 42px;">Play</th>
+                <th>Sample</th>
+                <th>Category</th>
+                <th>Duration</th>
+                <th>WER</th>
+                <th>Speed</th>
+                <th style="width: 70px;">Details</th>
+              </tr>
+            </thead>
+            <tbody id="benchmarkTbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: Settings -->
+    <section id="tab-settings" class="tab-pane">
+      <div class="page-header">
+        <h1 class="page-title">Settings</h1>
+        <p class="page-description">Configure transcription and application preferences.</p>
+      </div>
+
+      <div class="settings-section">
+        <h2 class="section-title">Transcription</h2>
+        <div class="settings-card">
+          <div class="file-options-grid">
+            <div class="field-group">
+              <label class="field-label" for="settingsModel">Active Model</label>
+              <select id="settingsModel" class="select-input">
+                <option value="small" selected>Small · High accuracy</option>
+                <option value="base">Base · Balanced</option>
+                <option value="tiny">Tiny · Quick</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="settingsThreads">CPU Allocation</label>
+              <select id="settingsThreads" class="select-input">
+                <option value="2">2 Threads · Minimal</option>
+                <option value="4">4 Threads · Balanced</option>
+                <option value="8">8 Threads · Recommended</option>
+                <option value="12">12 Threads · High Performance</option>
+                <option value="16" selected>16 Threads · Maximum Throughput</option>
+              </select>
+            </div>
+            <div>
+              <button class="btn-primary" id="saveSettingsBtn" style="height: 38px;">Save Settings</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h2 class="section-title">System & Host</h2>
+        <div class="settings-card">
+          <div class="hardware-grid">
+            <div class="hw-box">
+              <div class="hw-label">Operating System</div>
+              <div class="hw-value" id="sysOs">Windows</div>
+            </div>
+            <div class="hw-box">
+              <div class="hw-label">CPU Logical Cores</div>
+              <div class="hw-value" id="sysCores">16 Cores</div>
+            </div>
+            <div class="hw-box">
+              <div class="hw-label">System Memory</div>
+              <div class="hw-value" id="sysRam">Loading...</div>
+            </div>
+            <div class="hw-box">
+              <div class="hw-label">Process Memory</div>
+              <div class="hw-value" id="sysProcRam">Loading...</div>
+            </div>
+          </div>
+
+          <div class="privacy-footnote">
+            <svg class="svg-icon icon-sm" viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            <span>Runs locally on your device. Audio never leaves your machine.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Slide-out Benchmark Detail Drawer -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <div class="drawer" id="benchmarkDrawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title" id="drawerSampleTitle">sample_001.wav</h3>
+      <button class="drawer-close" id="drawerCloseBtn" aria-label="Close drawer">
+        <svg class="svg-icon" viewBox="0 0 24 24"><path d="m7 7 10 10" /><path d="m17 7-10 10" /></svg>
+      </button>
+    </div>
+
+    <div class="drawer-meta-grid">
+      <div class="drawer-meta-item">
+        <div class="label">Category</div>
+        <div class="val" id="drawerCategory">Clean</div>
+      </div>
+      <div class="drawer-meta-item">
+        <div class="label">Duration</div>
+        <div class="val" id="drawerDuration">4.8s</div>
+      </div>
+      <div class="drawer-meta-item">
+        <div class="label">Word Error Rate</div>
+        <div class="val" id="drawerWer">0.0%</div>
+      </div>
+      <div class="drawer-meta-item">
+        <div class="label">Inference Speed</div>
+        <div class="val" id="drawerRtf">1.8×</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="drawer-section-title">Audio Clip</div>
+      <audio id="drawerAudioPlayer" controls class="audio-element" style="margin-top: 6px;"></audio>
+    </div>
+
+    <div>
+      <div class="drawer-section-title">Reference Transcript (Ground Truth)</div>
+      <div class="drawer-text-box" id="drawerReferenceText">Reference text...</div>
+    </div>
+
+    <div>
+      <div class="drawer-section-title">Whisper Model Output (Hypothesis)</div>
+      <div class="drawer-text-box" id="drawerHypothesisText" style="color: var(--text-primary);">Hypothesis text...</div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toastMessage">Action completed</div>
+
+  <script src="/static/js/app.js?v=2.2"></script>
+</body>
+</html>

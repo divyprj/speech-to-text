@@ -1,0 +1,1 @@
+Spectrogram features are converted to mel frequency filter banks for acoustic analysis.
