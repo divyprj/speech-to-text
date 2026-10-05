@@ -42,19 +42,27 @@ app.add_middleware(
 # Include API routes
 app.include_router(api_router)
 
+# Health check endpoint
+@app.get("/health")
+def health_check():
+    return {"status": "ok", "app": "Local Transcriber"}
+
 # Serve static frontend
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
-    @app.get("/")
-    def serve_index():
-        return FileResponse(STATIC_DIR / "index.html")
+@app.get("/")
+def serve_index():
+    index_file = STATIC_DIR / "index.html"
+    if index_file.exists():
+        return FileResponse(index_file)
+    return {"status": "ok", "message": "Local Transcriber API is running"}
 
 
-def open_browser():
+def open_browser(port: int):
     """Wait for server to start and automatically open the application in browser."""
     time.sleep(1.2)
-    url = "http://127.0.0.1:8765"
+    url = f"http://127.0.0.1:{port}"
     print(f"\n[Local Transcriber] Opening interface in browser: {url}\n", flush=True)
     try:
         webbrowser.open(url)
@@ -68,8 +76,11 @@ def open_browser():
 
 
 def main():
-    host = os.environ.get("HOST", "0.0.0.0" if os.environ.get("PORT") else "127.0.0.1")
+    # If PORT is specified (cloud/Docker/Render), use it. Local default is 8765.
+    is_cloud = bool(os.environ.get("PORT") or os.environ.get("RENDER"))
+    host = os.environ.get("HOST", "0.0.0.0" if is_cloud else "127.0.0.1")
     port = int(os.environ.get("PORT", "8765"))
+
     print("="*65)
     print("              LOCAL TRANSCRIBER - OFFLINE SPEECH-TO-TEXT        ")
     print("="*65)
@@ -78,11 +89,11 @@ def main():
     print(f" Static Assets     : {STATIC_DIR}")
     print("="*65 + "\n")
 
-    # Launch browser thread only in local interactive sessions
-    if not os.environ.get("PORT"):
-        threading.Thread(target=open_browser, daemon=True).start()
+    # Launch browser only on local desktop
+    if not is_cloud:
+        threading.Thread(target=open_browser, args=(port,), daemon=True).start()
 
-    # Start server with direct app instance
+    # Start server
     uvicorn.run(app, host=host, port=port, log_level="info")
 
 
