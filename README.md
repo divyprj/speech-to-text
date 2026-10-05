@@ -1,5 +1,6 @@
 # Local Offline Speech-to-Text (STT) Platform
 
+[![Live Demo](https://img.shields.io/badge/Render-Live%20Demo-success?style=flat-square&logo=render)](https://speech-to-text-cm9k.onrender.com)
 [![Release](https://img.shields.io/github/v/release/divyprj/speech-to-text?color=5b8cff&style=flat-square)](https://github.com/divyprj/speech-to-text/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-34d399.svg?style=flat-square)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg?style=flat-square)](https://www.python.org/)
