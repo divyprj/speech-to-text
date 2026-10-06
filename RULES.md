@@ -1,4 +1,4 @@
-# Engineering Rules & Guidelines (RULESS.md)
+# Engineering Rules & Guidelines (RULES.md)
 
 ## Project: Local Offline Speech-to-Text Platform & Benchmark Engine
 **Document Version:** 1.0.0  
